@@ -1,0 +1,55 @@
+<app-detalle *ngIf="clienteSeleccionado" [cliente]="clienteSeleccionado"></app-detalle>
+
+<div class="card border-light mb-3" >
+  <div class="card-header">Cilentes</div>
+  <div class="card-body text-primary">
+    <h5 class="card-title">Listado de Clientes</h5>
+    <div class="my-2 text-left">
+      <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/clientes/form']">
+        Crear Cliente
+      </button>
+    </div>
+
+    <div *ngIf="clientes.length == 0" class="alert alert-info">
+      No hay datos para mostrar
+    </div>
+
+    <table class="table table-bordered table-striped" *ngIf="clientes.length > 0">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Email</th>
+        <th>Fecha</th>
+
+        <th colspan="2">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cliente of clientes">
+        <td>
+          <img  (click)="abrirModal(cliente)"  *ngIf="cliente.foto"
+          src="http://localhost:9898/api/uploads/img/{{cliente.foto}}" alt="{{cliente.foto}}" class="img-thumbnail rounded"
+          style="width:32px;cursor:pointer">
+
+          <img  (click)="abrirModal(cliente)"  *ngIf="!cliente.foto"
+          src="http://localhost:9898/images/no-user.png" alt="sin foto" class="img-thumbnail rounded"
+          style="width:32px;cursor:pointer">
+
+
+        </td>
+        <td>{{cliente.nombre}}</td>
+        <td>{{cliente.apellido | uppercase }}</td>
+        <td>{{cliente.email}}</td>
+        <td>{{cliente.fecha}}</td>
+        <td><button class="btn btn-primary btn-sm" [routerLink]="['/clientes/form', cliente.idCliente]">Editar</button></td>
+        <td><button class="btn btn-danger btn-sm" (click)="deleteCliente(cliente)">Eliminar</button></td>
+      </tr>
+    </tbody>
+
+
+    </table>
+    <app-paginator   *ngIf="paginadorPadre" [paginadorHijo]="paginadorPadre"></app-paginator>
+  </div>
+</div>

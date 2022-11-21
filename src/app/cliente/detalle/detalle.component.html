@@ -1,0 +1,56 @@
+<div *ngIf="modalService.modal" class="modal" tabindex="-1" style="display: block;">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"> {{ titulo }}</h5>
+        <button (click)="cerrarModal()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+
+      <div class="container">
+      <div class="row">
+        <div class="col-sm">
+          <div class="mb-3">
+            <ul *ngIf="cliente" class="list-group text-dark pb-3">
+              <li class="list-group-item active">{{cliente.idCliente}}</li>
+              <li class="list-group-item">{{cliente.apellido}}</li>
+              <li class="list-group-item">{{cliente.email}} </li>
+              <li class="list-group-item">{{cliente.fecha}}</li>
+              <li class="list-group-item" *ngIf="cliente.region"> {{cliente.region.nombre}}</li>
+
+
+
+             </ul>
+            <label for="formFileSm" class="form-label">Small file input example</label>
+            <input (change)="seleccionarFoto($event)" class="form-control form-control-sm" id="formFileSm" type="file">
+              <button  [disabled]="!fotoSeleccionada" class="btn btn-sm btn-primary" (click)="subirFoto()">Guarda</button>
+          </div>
+
+          <div class="progress" style="height: 40px" *ngIf="progreso > 0">
+            <div class="progress-bar" [ngStyle]="{width: progreso+'%'}" role="progressbar" aria-label="Basic example" attr.aria-valuenow="{{progreso}}" aria-valuemin="0" aria-valuemax="100">{{progreso}}%</div>
+          </div>
+    </div>
+
+
+    <div class="col-sm">
+      <img *ngIf="cliente" src="http://localhost:9898/api/uploads/img/{{cliente.foto}}" alt="{{cliente.foto}}" class="img-thumbnail rounded" >
+    </div>
+
+
+    </div>
+    </div>
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button (click)="cerrarModal()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

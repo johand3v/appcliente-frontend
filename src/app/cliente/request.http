@@ -1,0 +1,31 @@
+### GET
+GET http://localhost:9898/api/clientes
+
+### GET
+GET http://localhost:9898/api/clientes/53
+
+### POST
+POST http://localhost:9898/api/clientes
+Content-Type: application/json
+
+  {
+    "nombre": "Beth",
+    "apellido": "Sanchez",
+    "email": "aemail@gmail.com",
+   "fecha": "1999-12-31"
+  }
+
+### PUT
+PUT http://localhost:9898/api/clientes
+Content-Type: application/json
+
+ {
+  "idCliente": 4,
+  "nombre": "Morty",
+  "apellido": "Smith",
+  "email": "aemail@gmail.com",
+  "fecha": "1999-12-30"
+}
+
+### DELETE
+DELETE http://localhost:9898/api/clientes/2

@@ -1,0 +1,105 @@
+<ul class="alert alert-danger" *ngIf="errores.length > 0">
+  <li *ngFor="let err of errores">
+    {{err}}
+  </li>
+</ul>
+<div class="card bg-dark text-white pb-5">
+  <div class="card-header">{{titulo}}</div>
+    <div class="card-body">
+      <form  #clienteForm="ngForm"> <!--(ngSubmit)="guardarCliente()" -->
+          <div class="form-group row">
+            <label for="nombre" class="col-form-label col-sm-2">Nombre:</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" [(ngModel)]="cliente.nombre" name="nombre"
+                required="" minlength="4" #nombre= "ngModel" >
+
+                <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+                  <div *ngIf="nombre.errors">
+                    Nombre es requedio
+                  </div>
+                </div>
+
+              </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="apellido" class="col-form-label col-sm-2">Apellido:</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" [(ngModel)]="cliente.apellido" name="apellido"
+                required="" minlength="4" #apellido= "ngModel" >
+
+                <div class="alert alert-danger" *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)">
+                  <div *ngIf="apellido.errors">
+                    Apellido es requedio
+                  </div>
+                </div>
+
+
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="email" class="col-form-label col-sm-2">Email:</label>
+            <div class="col-sm-6">
+                <input type="email" class="form-control" [(ngModel)]="cliente.email" name="email"
+                required="" minlength="4" #email= "ngModel">
+
+                <div class="alert alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+                  <div *ngIf="email.errors">
+                    Correo es requedio
+                  </div>
+                </div>
+
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="fecha" class="col-form-label col-sm-2">Fecha:</label>
+            <div class="col-sm-6">
+                <input type="date" class="form-control" [(ngModel)]="cliente.fecha" name="fecha"
+                required="" minlength="4" #fecha= "ngModel">
+
+                <div class="alert alert-danger" *ngIf="fecha.invalid && (fecha.dirty || fecha.touched)">
+                  <div *ngIf="fecha.errors">
+                    Fecha Necesaria
+                  </div>
+                </div>
+
+            </div>
+          </div>
+
+
+          <div class="form-group row">
+            <label for="fecha" class="col-form-label col-sm-2">Region:</label>
+            <div class="col-sm-6">
+                <select [compareWith]="compararRegion" type="date" class="form-control" [(ngModel)]="cliente.region" name="region">
+                  <option [ngValue]="undefined">--Selecciona una region--</option>
+                  <option *ngFor="let region of regiones" [ngValue]="region">{{region.nombre}}</option>
+
+                </select>
+            </div>
+          </div>
+
+
+          <div class="form-group row">
+            <div class="col-sm-6">
+              <button class="btn btn-primary" role="button" (click) = 'create()' *ngIf="!cliente.idCliente else elseBlock"
+               cmd
+               [disabled]="!clienteForm.form.valid">Registrar</button>
+
+              <ng-template #elseBlock>
+                <button class="btn btn-primary" role="button" (click)='update()'  [disabled]="!clienteForm.form.valid">Actualizar</button>
+              </ng-template>
+
+            </div>
+          </div>
+
+
+
+
+
+
+      </form>
+
+    </div>
+</div>
